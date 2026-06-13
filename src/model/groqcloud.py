@@ -19,8 +19,7 @@ from src.utils.logger import logger
 
 
 def build_llm(
-    model: str | None = None,
-    temperature: float | None = None,
+    temperature: float = settings.groq_temperature,
     **kwargs,
 ) -> ChatOpenAI:
     """Instantiate a ChatOpenAI client pointed at GroqCloud.
@@ -33,8 +32,8 @@ def build_llm(
     Returns:
         A ready-to-use ChatOpenAI instance.
     """
-    resolved_model = model or settings.groq_model
-    resolved_temp = temperature if temperature is not None else settings.groq_temperature
+    resolved_model = settings.groq_model
+    resolved_temp = settings.groq_temperature
 
     logger.info("Building GroqCloud LLM | model={} | temperature={}", resolved_model, resolved_temp)
 
